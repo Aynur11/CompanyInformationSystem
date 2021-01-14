@@ -19,71 +19,72 @@ namespace CompanyInformationSystem
         {
             InitializeComponent();
 
+           
+            string companyName = "ОАО Прогрессивные разработки";
+            ObservableCollection<Department> headDepartments = new ObservableCollection<Department>()
+            {
+                new Department
+                ("Программные разработки",
+                    new ObservableCollection<Employee>
+                    {
+                        new Director("Павел", "Сафронов")
+                    },
+                    new ObservableCollection<Department>
+                    {
+                        new Department("Отдел контроля качества",
+                            new ObservableCollection<Employee>
+                            {
+                                new Director("Николай", "Павлов"),
+                                new QaEngineer("Вася", "Васильев",170),
+                                new Intern("Иван", "Петров", 20000),
+                                new Intern("Михаил", "Михайлов", 15000),
+                            }),
+                        new Department("Отдел аналитики",
+                            new ObservableCollection<Employee>
+                            {
+                                new Director("Виталий", "Литов"),
+                                new Analyst("Дмитрий", "Дмитириев", 200),
+                                new Analyst("Александр", "Павлов", 220),
+                            })
+
+                    }),
+                new Department
+                ("Ведомство продаж",
+                    new ObservableCollection<Employee>
+                    {
+                        new Director("Алексей", "Крюков")
+                    },
+                    new ObservableCollection<Department>
+                    {
+                        new Department("Отдел продаж",
+                            new ObservableCollection<Employee>
+                            {
+                                new Director("Константин", "Ткачюк"),
+                                new Manager("Михаил", "Петров", 250),
+                                new Manager("Иван", "Витальев", 180),
+                            }),
+                        new Department("Отдел продаж_2",
+                            new ObservableCollection<Employee>
+                            {
+                                new Director("Шамиль", "Кудрявцев")
+                            },
+                            new ObservableCollection<Department>
+                            {
+                                new Department("Отдел продаж_3",
+                                    new ObservableCollection<Employee>
+                                    {
+                                        new Director("Савелий", "Чупряк"),
+                                        new Manager("Евгений", "Мальцов", 211),
+                                        new Manager("Лев", "Борисов", 199),
+                                    })
+                            })
+                    })
+            };
+
+            Company = new Company(companyName, headDepartments);
+
             #region MyRegion
-            //string companyName = "ОАО Прогрессивные разработки";
-            //ObservableCollection<Department> headDepartments = new ObservableCollection<Department>()
-            //{
-            //    new Department
-            //    ("Программные разработки",
-            //        new ObservableCollection<Employee>
-            //        {
-            //            new Director("Павел", "Сафронов")
-            //        },
-            //        new ObservableCollection<Department>
-            //        {
-            //            new Department("Отдел контроля качества",
-            //                new ObservableCollection<Employee>
-            //                {
-            //                    new Director("Николай", "Павлов"),
-            //                    new QaEngineer("Вася", "Васильев",170),
-            //                    new Intern("Иван", "Петров", 20000),
-            //                    new Intern("Михаил", "Михайлов", 15000),
-            //                }),
-            //            new Department("Отдел аналитики",
-            //                new ObservableCollection<Employee>
-            //                {
-            //                    new Director("Виталий", "Литов"),
-            //                    new Analyst("Дмитрий", "Дмитириев", 200),
-            //                    new Analyst("Александр", "Павлов", 220),
-            //                })
-
-            //        }),
-            //    new Department
-            //    ("Ведомство продаж",
-            //        new ObservableCollection<Employee>
-            //        {
-            //            new Director("Алексей", "Крюков")
-            //        },
-            //        new ObservableCollection<Department>
-            //        {
-            //            new Department("Отдел продаж",
-            //                new ObservableCollection<Employee>
-            //                {
-            //                    new Director("Константин", "Ткачюк"),
-            //                    new Manager("Михаил", "Петров", 250),
-            //                    new Manager("Иван", "Витальев", 180),
-            //                }),
-            //            new Department("Отдел продаж_2",
-            //                new ObservableCollection<Employee>
-            //                {
-            //                    new Director("Шамиль", "Кудрявцев")
-            //                },
-            //                new ObservableCollection<Department>
-            //                {
-            //                    new Department("Отдел продаж_3",
-            //                        new ObservableCollection<Employee>
-            //                        {
-            //                            new Director("Савелий", "Чупряк"),
-            //                            new Manager("Евгений", "Мальцов", 211),
-            //                            new Manager("Лев", "Борисов", 199),
-            //                        })
-            //                })
-            //        })
-            //};
-
-            //Company = new Company(companyName, headDepartments);
             //string json = JsonConvert.SerializeObject(Company);
-
             //Newtonsoft.Json.JsonSerializer serializer = new Newtonsoft.Json.JsonSerializer();
             //serializer.Converters.Add(new Newtonsoft.Json.Converters.JavaScriptDateTimeConverter());
             //serializer.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
@@ -96,21 +97,19 @@ namespace CompanyInformationSystem
             //    serializer.Serialize(writer, Company, typeof(Company));
             //}
 
-
             //File.WriteAllText("Company.json", json);
 
+            //string json = File.ReadAllText("Company.json");
+            //Company = JsonConvert.DeserializeObject<Company>(json, new Newtonsoft.Json.JsonSerializerSettings
+            //{
+            //    TypeNameHandling = Newtonsoft.Json.TypeNameHandling.Auto,
+            //    NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore,
+            //});
+
+            //// Пересчитываем зарплаты после загрузки структуры из файла, т.к. в компании могли поменяться часы, дни работы.
+            //Company.UpdateAllEmployeesSalary(Company.Departments);
+            //Company.UpdateDirectorSalaryCoefficient(Company.Departments);
             #endregion
-
-            string json = File.ReadAllText("Company.json");
-            Company = JsonConvert.DeserializeObject<Company>(json, new Newtonsoft.Json.JsonSerializerSettings
-            {
-                TypeNameHandling = Newtonsoft.Json.TypeNameHandling.Auto,
-                NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore,
-            });
-
-            // Пересчитываем зарплаты, т.к. в компании могли поменяться часы, дни работы.
-            Company.UpdateAllEmployeesSalary(Company.Departments);
-            Company.UpdateDirectorSalaryCoefficient(Company.Departments);
 
             DataContext = Company;
             treeView.ItemsSource = Company.Departments;

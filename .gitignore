@@ -5,13 +5,14 @@
 *.sln.docstates
 *.vcxproj.filters
 
+!**/obj/Debug/Company.json
+
 # folders
 .vs/
 .nuget/
 tools/
-**/obj
+**/obj/Debug/
 **/bin
-!**/bin/Debug/Company.json
 packages/
 TestResults/
 
