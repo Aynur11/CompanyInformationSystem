@@ -11,5 +11,7 @@
 tools/
 **/obj
 **/bin
+!**/bin/Debug/Company.json
 packages/
 TestResults/
+
